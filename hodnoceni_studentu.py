@@ -39,6 +39,22 @@ class StudentsGrades:
                     scores[i], scores[i + 1] = scores[i + 1], scores[i]
         return scores
 
+    def average(self):
+        return sum(self.scores) / len(self.scores)
+
+    def best(self):
+        return max(self.scores)
+
+    def worst(self):
+        return min(self.scores)
+
+    def pass_rate(self):
+        passed = 0
+        for score in self.scores:
+            if score >= 50:
+                passed += 1
+        return passed / len(self.scores)
+
 def main():
     results = StudentsGrades([85, 42, 91, 67, 50, 73, 100, 38, 58])
     number_of_students = results.count()
@@ -47,13 +63,19 @@ def main():
         print(f"Student {i}: {results.get_by_index(i)} points - {results.get_grade(i)}")
     print(f"Student {results.find(100)} got 100 points.")
     print(f"Results from the worst to the best: {results.get_sorted()}.")
-    random_results = StudentsGrades(random_numbers(30, 0, 100))
-    print(f"Random test was written by {random_results.count()} students.")
-    for i, result in enumerate(random_results.scores):
-        print(f"Random student {i}: {random_results.get_by_index(i)} points - {random_results.get_grade(i)}")
-    print(f"Random student {random_results.find(100)} got 100 points.")
-    print(f"Random results from the worst to the best: {random_results.get_sorted()}.")
-    
+    print(f"Average result was {results.average():.2f}")
+    print(f"The best result was {results.best()}")
+    print(f"The worst result was {results.worst()}")
+    print(f"Fruitfulness was {results.pass_rate():.2f}")
+
+
+    # random_results = StudentsGrades(random_numbers(30, 0, 100))
+    # print(f"Random test was written by {random_results.count()} students.")
+    # for i, result in enumerate(random_results.scores):
+    #     print(f"Random student {i}: {random_results.get_by_index(i)} points - {random_results.get_grade(i)}")
+    # print(f"Random student {random_results.find(100)} got 100 points.")
+    # print(f"Random results from the worst to the best: {random_results.get_sorted()}.")
+
 
 if __name__ == "__main__":
     main()
